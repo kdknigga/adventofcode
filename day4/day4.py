@@ -21,6 +21,20 @@ def calculate_checksum(word):
 
 	return calculated_checksum[:5]
 
+def decrypt(cyphertext, rotations):
+	plaintext = ""
+
+	for cypherletter in cyphertext:
+		if cypherletter == "-":
+			plaintext = plaintext + " "
+		else:
+			if (ord(cypherletter) + rotations) > ord("z"):
+				plaintext = plaintext + chr(ord(cypherletter) + rotations - 26)
+			else:
+				plaintext = plaintext + chr(ord(cypherletter) + rotations)
+
+	return plaintext
+
 sector_sum = 0
 
 with open(sys.argv[1]) as f:
@@ -29,6 +43,7 @@ with open(sys.argv[1]) as f:
 		#print checksum + " :: " + test_checksum
 		if checksum == test_checksum:
 			sector_sum += int(sector)
+			print "Room: " + decrypt(cyphertext, int(sector)%26) + ",  Sector: " + sector
 
 print "Sector sum: " + str(sector_sum)
 
