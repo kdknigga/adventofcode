@@ -46,11 +46,11 @@ with open(args.input_file) as f:
 
 		if abba_line:
 			abba_count += 1
-			debug_print("ABBA True:  " + line)
+			debug_print("TLS True:  " + line)
 		else:
-			debug_print("ABBA False: " + line)
+			debug_print("TLS False: " + line)
 
 		debug_print("")
 
 
-print "Total ABBA lines: " + str(abba_count)
+print "Total TLS IPs: " + str(abba_count)

@@ -48,11 +48,11 @@ with open(args.input_file) as f:
 
 		if ssl_line:
 			ssl_count += 1
-			debug_print("ABBA True:  " + line)
+			debug_print("SSL True:  " + line)
 		else:
-			debug_print("ABBA False: " + line)
+			debug_print("SSL False: " + line)
 
 		debug_print("")
 
 
-print "Total SSL lines: " + str(ssl_count)
+print "Total SSL IPs: " + str(ssl_count)
