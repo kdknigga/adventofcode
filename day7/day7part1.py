@@ -26,19 +26,20 @@ with open(args.input_file) as f:
 		abba_line = False
 		in_brackets = False
 		for i in range(len(line) - 3):
-			if line[i] == "[":
+			test_string = line[i:i+4]
+			if "[" in test_string:
 				in_brackets = True
 				continue
 
-			if line[i] == "]":
+			if "]" in test_string:
 				in_brackets = False
 				continue
 
 			if not in_brackets:
-				if find_abba(line[i:i+4]):
+				if find_abba(test_string):
 					abba_line = True
 			else:
-				if find_abba(line[i:i+4]):
+				if find_abba(test_string):
 					debug_print("Found ABBA in brackets.  This line isn't a match", 2)
 					abba_line = False
 					break
