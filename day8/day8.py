@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+from __future__ import print_function
 import os, sys, argparse
 
 parser = argparse.ArgumentParser()
@@ -50,6 +51,14 @@ with open(args.input_file) as f:
 		else:
 			print >> sys.stderr, "Unknown command: " + line[0]
 
-print str(screen)
-print "Lit pixel count = " + str(count_lit_pixels(screen))
+for row in screen:
+	for col in row:
+		if col == 1:
+			print("#", end="")
+		else:
+			print(" ", end="")
+
+	print("")
+
+print("Lit pixel count = " + str(count_lit_pixels(screen)))
 
