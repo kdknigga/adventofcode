@@ -90,3 +90,6 @@ ENV/
 
 # vi
 *.swp
+
+# wget cookies
+cookies.txt
