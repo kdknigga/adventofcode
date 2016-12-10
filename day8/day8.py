@@ -12,7 +12,7 @@ args = parser.parse_args()
 
 def debug_print(string, level=1):
 	if args.debug >= level:
-		print >> sys.stderr, string
+		print(string, file=sys.stderr)
 
 screen = [[0 for x in range(args.width)] for y in range(args.height)]
 
@@ -37,6 +37,26 @@ def rotate_row(a, row, n):
 def count_lit_pixels(a):
 	return sum(map(sum, a))
 
+def display_screen(a):
+       for row in screen:
+	       for col in row:
+		       if col == 1:
+			       print("#", end="")
+		       else:
+			       print(" ", end="")
+
+	       print("")
+
+def display_screen(a):
+	for row in screen:
+		for col in row:
+			if col == 1:
+				print("#", end="")
+			else:
+				print(" ", end="")
+
+		print("")
+
 with open(args.input_file) as f:
 	for line in [ line.strip().split() for line in f ]:
 		if line[0] == "rect":
@@ -47,18 +67,16 @@ with open(args.input_file) as f:
 			elif line[1] == "row":
 				rotate_row(screen, int(line[2].split("=")[1]), int(line[4]))
 			else:
-				print >> sys.stderr, "Unknown rotate command: " + line[1]
+				print("Unknown rotate command: " + line[1], file=sys.stderr)
 		else:
-			print >> sys.stderr, "Unknown command: " + line[0]
+			print("Unknown command: " + line[0], file=sys.stderr)
 
-for row in screen:
-	for col in row:
-		if col == 1:
-			print("#", end="")
-		else:
-			print(" ", end="")
+		if args.debug >= 1:
+			print(line)
+			display_screen(screen)
+			print("")
 
-	print("")
 
+display_screen(screen)
 print("Lit pixel count = " + str(count_lit_pixels(screen)))
 
